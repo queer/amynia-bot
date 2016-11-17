@@ -2,6 +2,17 @@ import os
 import imutils
 import cv2
 
+import time
+
+# We time when each last keypress was, and then we make sure to wait at least 32ms
+# (2 frames @ 60FPS) so that we don't get multiple keypresses
+currentTimeMillis = lambda: int(round(time.time() * 1000))
+dTime = currentTimeMillis()
+fTime = currentTimeMillis()
+jTime = currentTimeMillis()
+kTime = currentTimeMillis()
+WAIT_TIME_MILLIS = 80
+
 cap = cv2.VideoCapture()
 print('Waiting on video...')
 cap.open('udp://127.0.0.1:1234/')
@@ -35,17 +46,25 @@ while True:
                             xpos = abs(approx[0][0][0])
                             # D~10 F~80 J~160 K~240
                             key = 'UNKNOWN'
-                            if abs(30 - xpos) < 5:
+                            # Try to wait at least 2 frames between keypresses
+                            if abs(30 - xpos) < 5 and abs(dTime - currentTimeMillis()) > WAIT_TIME_MILLIS:
                                 key = 'D'
                                 os.system('xdotool key --window "$(xdotool search --name \'osu!cuttingedge\')" d')
-                            elif abs(100 - xpos) < 5:
+                                dTime = currentTimeMillis()
+                            elif abs(100 - xpos) < 5 and abs(fTime - currentTimeMillis()) > WAIT_TIME_MILLIS:
                                 key = 'F'
                                 os.system('xdotool key --window "$(xdotool search --name \'osu!cuttingedge\')" f')
-                            elif abs(180 - xpos) < 5:
+                                fTime = currentTimeMillis()
+                            elif abs(180 - xpos) < 5 and abs(jTime - currentTimeMillis()) > WAIT_TIME_MILLIS:
                                 key = 'J'
                                 os.system('xdotool key --window "$(xdotool search --name \'osu!cuttingedge\')" j')
-                            elif abs(260 - xpos) < 5:
+                                jTime = currentTimeMillis()
+                            elif abs(260 - xpos) < 5 and abs(kTime - currentTimeMillis()) > WAIT_TIME_MILLIS:
                                 key = 'K'
                                 os.system('xdotool key --window "$(xdotool search --name \'osu!cuttingedge\')" k')
+                                kTime = currentTimeMillis()
+                            # If we don't know what something is, just outright ignore it and hope for the best
+                            if key == 'UNKNOWN':
+                                continue
                             print('click ' + key + ' @ (' + str(xpos) + ', ' + str(ypos) + ').')
 
