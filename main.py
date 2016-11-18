@@ -17,7 +17,7 @@ kTime = currentTimeMillis()
 lTime = currentTimeMillis()
 WAIT_TIME_MILLIS = 80
 xdo = Xdo()
-window_id = xdo.search_windows(winname=bytes('osu!cuttingedge', 'utf-8'))[0]
+window_id = xdo.search_windows(winname=bytes('osu!', 'utf-8'))[0]
 
 mode = ''
 

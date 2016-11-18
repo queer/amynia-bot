@@ -1,4 +1,4 @@
-# osu!mania bot
+# amynia!bot
 
 An attempt at making an osu!mania bot that plays the game through OpenCV. Currently, the bot can automatically distinguish between 4K and 7K, and can hit normal notes. Sliders are currently NOT supported, so slider-heavy maps WILL break it.
 
