@@ -50,6 +50,7 @@ while True:
                     if abs(70 - abs(approx[0][0][0] - approx[2][0][0])) < 10:
                         ypos = abs(approx[1][0][1])
                         # TODO: Should adjust this based on the last position...
+                        # Current best settings: 880~895
                         if ypos > 880 and ypos < 895:
                             #
                             # 4K mode
