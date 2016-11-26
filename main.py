@@ -17,7 +17,7 @@ kTime = currentTimeMillis()
 lTime = currentTimeMillis()
 WAIT_TIME_MILLIS = 80
 xdo = Xdo()
-window_id = xdo.search_windows(winname=bytes('osu!', 'utf-8'))[0]
+window_id = xdo.search_windows(winname=bytes('osu!cuttingedge', 'utf-8'))[0]
 
 mode = ''
 
@@ -51,7 +51,7 @@ while True:
                         ypos = abs(approx[1][0][1])
                         # TODO: Should adjust this based on the last position...
                         # Current best settings: 880~895
-                        if ypos > 880 and ypos < 895:
+                        if ypos > 885 and ypos < 895:
                             #
                             # 4K mode
                             #
